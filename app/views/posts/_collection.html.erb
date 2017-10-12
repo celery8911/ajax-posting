@@ -4,8 +4,8 @@
 
  <% if current_user # 登入才可以收藏 %>
    <% if post.find_collection(current_user) %>
-     <%= link_to "取消❤️", cancelcollection_post_path(post), :method => :post, :remote => true, :class => "btn btn-primary" %>
+     <%= link_to "❤️", cancelcollection_post_path(post), :method => :post, :remote => true, :class => "btn btn-primary" %>
    <% else %>
-     <%= link_to "❤️", collection_post_path(post), :method => :post, :remote => true, :class => "btn btn-primary" %>
+     <%= link_to "❤", collection_post_path(post), :method => :post, :remote => true, :class => "btn btn-primary" %>
    <% end %>
  <% end %>
