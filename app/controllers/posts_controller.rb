@@ -25,7 +25,7 @@ class PostsController < ApplicationController
            Like.create( :user => current_user, :post => @post)
          end
 
-          
+
        end
 
        def unlike
@@ -36,12 +36,26 @@ class PostsController < ApplicationController
          render "like"
        end
 
+     def collection
+        @post = Post.find(params[:id])
+        unless @post.find_collection(current_user) # 如果已经收藏过了，就略过不再新增
+          Collection.create( :user => current_user, :post => @post)
+        end
+      end
+
+      def cancelcollection
+        @post = Post.find(params[:id])
+        collection = @post.find_collection(current_user)
+        collection.destroy
+
+        render "collection"
+      end
+
 
      protected
 
      def post_params
        params.require(:post).permit(:content)
       end
-
 
 end
